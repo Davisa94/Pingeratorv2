@@ -2,3 +2,4 @@ node_modules/*
 src/frontend/node_modules/*
 src/backend/dbcredentials.json
 Solution1.sln
+src/backend/oldmain.py

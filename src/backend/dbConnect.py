@@ -52,6 +52,6 @@ class MyDb:
         return mysql_connection
     
 
-mydb = MyDb()
-connection = mydb.dbConnect()
-connection.fetchall()
+# mydb = MyDb()
+# connection = mydb.dbConnect()
+# connection.fetchall()

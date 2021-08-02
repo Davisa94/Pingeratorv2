@@ -23,3 +23,6 @@ class DBInteract:
         sql = ("SELECT * FROM speeds WHERE (course_code = %s and course_prefix = %s)")
         self.DBO.cursor.execute(sql, (course_code, course_prefix))
         return dbObject
+
+    def insertSpeed(self, sql):
+        self.DBO.cursor.execute(sql)
