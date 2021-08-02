@@ -3,9 +3,6 @@
 # Author: Austin Benitez
 ################################################################
 
-from name import Name
-from location import Location
-from sectionDataClass import CourseSectionData
 import pymysql
 
 
