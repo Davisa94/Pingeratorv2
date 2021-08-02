@@ -216,11 +216,11 @@ def main():
     # Connect to the Database
     desktop_dir = generateDesktopPath()
     home_dir = generateHomeFolder(desktop_dir)
-    #check if files exist, if they do  move along, if not, generate them with appropriate headers
+    #check if files exist, if they do move along, if not, generate them with appropriate headers
 
     print("The detected desktop directory is {} and will be used for storing the data folder".format(home_dir))
     pingG = PingGoogle(home_dir)
-    pingC = PingCloudFlare(home_dir)
+    pingC = PingCloudFlare(home_dir) 
     pingO = PingOpenDNS(home_dir)
     analyzer = DataAnalyzer()
     st = SpeedyTester(home_dir)
