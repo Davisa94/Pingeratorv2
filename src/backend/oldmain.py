@@ -4,8 +4,8 @@ import pandas as pd
 from pythonping import ping
 from datetime import datetime
 import speedtest
-import dbConnect as dbConnect
-import dbInteract as DBI
+from dbConnect import MyDb
+from dbInteract import DBInteract
 
 
 # Global Values
@@ -214,26 +214,38 @@ class DataAnalyzer:
 
 def main():
     # Connect to the Database
-    desktop_dir = generateDesktopPath()
-    home_dir = generateHomeFolder(desktop_dir)
-    #check if files exist, if they do move along, if not, generate them with appropriate headers
+    myDB = dbConnect()
+    db_connection = myDB.connect()
+    db_interactor = DBInteract(db_connection)
+    try:
+        
+        desktop_dir = generateDesktopPath()
+        home_dir = generateHomeFolder(desktop_dir)
+        #check if files exist, if they do move along, if not, generate them with appropriate headers
 
-    print("The detected desktop directory is {} and will be used for storing the data folder".format(home_dir))
-    pingG = PingGoogle(home_dir)
-    pingC = PingCloudFlare(home_dir) 
-    pingO = PingOpenDNS(home_dir)
-    analyzer = DataAnalyzer()
-    st = SpeedyTester(home_dir)
+        print("The detected desktop directory is {} and will be used for storing the data folder".format(home_dir))
+        pingG = PingGoogle(home_dir)
+        pingC = PingCloudFlare(home_dir) 
+        pingO = PingOpenDNS(home_dir)
+        analyzer = DataAnalyzer()
+        st = SpeedyTester(home_dir)
 
-    while True:
-        time.sleep(8)
-        pingG.run()
-        pingC.run()
-        pingO.run()
-        st.run()
+        while True:
+            time.sleep(8)
+            pingG.run()
+            pingC.run()
+            pingO.run()
+            st.run()
 
-    input("Press Enter To Continue")
-    exit()
+        input("Press Enter To Continue")
+        exit()
+    # Close the connection
+    except Exception as e:
+        print("An unexpected exeception has occured:{}".format(e))
+    finally:
+        db_connection.close()
+
+    
 
 
 if __name__ == '__main__':
