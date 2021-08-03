@@ -2,22 +2,23 @@
 const { spawn } = require('child_process')
 const {app, BrowserWindow} = require('electron')
 const path = require('path')
+const dbApi = require('./dbAPI');
+dbApi.printCreds()
 
-let fullpath = [path.join(__dirname, '/../backend/main.py')]
-const {PythonShell} = require('python-shell');
+// const {PythonShell} = require('python-shell');
 
-let pyshell = new PythonShell('../backend/main.py');
+// let pyshell = new PythonShell('../backend/main.py');
 
-pyshell.on('message', function(message) {
-  console.log(message);
-})
+// pyshell.on('message', function(message) {
+//   console.log(message);
+// })
 
-pyshell.end(function (err) {
-  if (err){
-    throw err;
-  };
-  console.log('finished');
-});
+// pyshell.end(function (err) {
+//   if (err){
+//     throw err;
+//   };
+//   console.log('finished');
+// });
 function createWindow () {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
