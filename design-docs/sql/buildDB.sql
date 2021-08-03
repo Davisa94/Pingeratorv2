@@ -35,7 +35,7 @@ CREATE table speed (
     downspeed_value DOUBLE NULL,
     upspeed_value DOUBLE NULL);
 
-CREATE table pings (
+CREATE table ping (
     datetime_tested TIMESTAMP NOT NULL,
     ping_value FLOAT NULL,
     ipv4_id BIGINT UNSIGNED NOT NULL,
