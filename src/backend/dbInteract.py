@@ -4,7 +4,7 @@
 ################################################################
 
 import pymysql
-import datetime
+from datetime import datetime
 
 
 class DBInteract:
