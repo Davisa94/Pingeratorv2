@@ -1,11 +1,17 @@
+class Pinger:
+    def pinger(host):
+        responses = ping(host, count=1)
+        return responses
 
-class Ping:
+
+
+class Ping(Pinger):
     def __init__(self):
         self.host=""
         self.file=""
     
     def runLocal(self, db_interactor):
-        responses = pinger(self.host)
+        responses = self.pinger(self.host)
         res = {}
         for response in responses:
             res = response

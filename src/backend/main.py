@@ -10,7 +10,7 @@ import re
 
 from modules import GlobalValues as GV
 from modules import FileManager as FM
-from pythonping import ping
+from modules import PythonPing as PP
 
 # Global Values
 
@@ -139,11 +139,6 @@ def printDataframeHeaderToFile(writableResponses, file):
 
 def printDataframeToFile(writableResponses, file):
     writableResponses.to_csv(file, header=None, mode="a")
-
-
-def pinger(host):
-    responses = ping(host, count=1)
-    return responses
 
 class SpeedyTester:
     def __init__(self, desktop):
