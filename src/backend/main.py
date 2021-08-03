@@ -15,24 +15,6 @@ from modules import PythonPing as PP
 # Global Values
 runningDir = os.path.dirname(__file__)
 
-class SpeedyTester:
-    def __init__(self, desktop):
-        self.file = desktop + _SPEEDSOUTFILE
-        generateFile(self.file, _SPEEDDICT)
-
-
-    def upload_test(self):
-        pass
-    def run(self, db_interactor):
-        print("The full path to my log files is at: {} ".format(self.file))
-        st = speedtest.Speedtest()
-        # print("Success" if res.success else " Failed")
-        print(st.download())
-        # sql = generateSpeedSQL(st)
-        # storeSpeedToDB(sql, db_interactor)
-        db_interactor.insertSpeed(st)
-
-        # printDataframeToFile(wr, self.file)
 
     
 
