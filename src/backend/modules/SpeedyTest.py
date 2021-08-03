@@ -1,3 +1,4 @@
+import sys
 import speedtest
 ################################################################
 # A class that encapsulates the speedtest library and gives
@@ -11,4 +12,5 @@ class SpeedyTester:
     def run(self, db_interactor):
         st = speedtest.Speedtest()
         print(st.download())
+        sys.stdout.flush()
         db_interactor.insertSpeed(st)

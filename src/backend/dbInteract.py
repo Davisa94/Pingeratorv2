@@ -6,12 +6,12 @@
 import pymysql
 from datetime import datetime
 import re
+import sys
 
 
 class DBInteract:
     def __init__(self, dbObject=""):
         self.DBO = dbObject
-        print("RAW DATABASE OBJECT: ", self.DBO)
 
 
     def getAllSpeeds(self):
@@ -46,9 +46,11 @@ class DBInteract:
     def responseToRawPing(self, response):
         raw_ping = re.search('(([0-9]+\.[0-9]+)?ms)',str(response))
         print("RAW PING: ", raw_ping[0])
+        sys.stdout.flush()
         raw_ping = raw_ping[0]
         raw_ping = raw_ping.strip("ms")
         print(raw_ping)
+        sys.stdout.flush()
         return raw_ping
 
     def getLatestPing(self):
@@ -59,7 +61,6 @@ class DBInteract:
         # get current time
         curr_date_time = datetime.now()
         if "Request timed out" not in str(ping_response):
-            print("BEFORE ERROR: ", ping_response)
             ping = self.responseToRawPing(ping_response)
         else:
             ping = -1

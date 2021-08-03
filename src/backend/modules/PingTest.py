@@ -1,5 +1,8 @@
 from modules import GlobalValues as GV
 from pythonping import ping
+import sys
+
+
 class Pinger:
     def pinger(self, host):
         responses = ping(host, count=1)
@@ -16,6 +19,7 @@ class Ping(Pinger):
         for response in responses:
             res = response
         print(res)
+        sys.stdout.flush()
         db_interactor.insertPing(res, self.host)
 
 class PingGoogle(Ping):

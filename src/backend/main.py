@@ -3,6 +3,8 @@ import os
 import pandas as pd
 from pythonping import ping
 from datetime import datetime
+import sys
+
 
 from dbConnect import MyDb
 from dbInteract import DBInteract
@@ -25,6 +27,7 @@ class DataAnalyzer:
     def analyze(self):
         place_holder_message = "Analyzing the data. Press any key to exit the application."
         print(place_holder_message)
+        sys.stdout.flush()
 
 
 
@@ -56,7 +59,8 @@ def main():
         exit()
     # Close the connection
     except Exception as e:
-        print("An unexpected error occurred: }".formt(e))
+        print("An unexpected error occurred: ".format(e))
+        sys.stdout.flush()
     finally:
         db_cursor.close()
 
