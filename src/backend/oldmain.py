@@ -51,7 +51,7 @@ def generateOutObject(response, host):
         "responseTime": [response],
         "Succeeded": [succeeded]
     }
-    responseToRawPing(str(response))
+    # responseToRawPing(str(response))
     writableResponse = pd.DataFrame.from_dict(dict)
     return writableResponse
 

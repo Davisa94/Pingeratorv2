@@ -51,19 +51,10 @@ class DBInteract:
 
     def insertPing(self, ping_response, host):
         # get current time
-        succeeded = response.success
         curr_date_time = datetime.now()
-        print("CURRENTDATETIME: ", datetime.now())
-        currTime = datetime.now().time()
-        self.responseToRawPing(response)
-        dict = {
-            "Day": [currDate],
-            'TimeStamp': [currTime],
-            'Host': [host],
-            "responseTIme": [response],
-            "Succeeded": [succeeded]
-        }
-
-        sql = "INSERT INTO ping VALUES ('{}', )"
-        writableResponse = pd.DataFrame.from_dict(dict)
-        return writableResponse
+        if response != "Request timed out":
+            ping = self.responseToRawPing(response)
+        else:
+            ping = -1
+        ip_id = self.getIPID(host)
+        sql = "INSERT INTO ping VALUES ('{}', {}, {})".format(curr_date_time, ping, ip_id)
