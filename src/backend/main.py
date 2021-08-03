@@ -11,6 +11,7 @@ import re
 from modules import GlobalValues
 from modules import FileManager as FM
 from modules import PingTest as PT
+from modules import SpeedyTest
 
 # Global Values
 runningDir = os.path.dirname(__file__)
@@ -40,12 +41,12 @@ def main():
         pingC = PT.PingCloudFlare() 
         pingO = PT.PingOpenDNS()
         analyzer = DataAnalyzer()
-        st = SpeedyTester()
+        st = SpeedyTest.SpeedyTester()
 
         while True:
             time.sleep(8)
             pingG.run(db_interactor)
-            pingC.run()
+            pingC.run(db_interactor)
             pingO.run(db_interactor)
             st.run(db_interactor)
             # commit the changes to the database
