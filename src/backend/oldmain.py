@@ -62,7 +62,7 @@ def generateSpeedSQL(st_obj):
     currDateTime = datetime.now()
     # SQLTimestamp = currDateTime.strftime('%Y-%m-%d %H:%M:%S')
     # print("TIMESTAMPRAW", SQLTimestamp)
-    sql = 'INSERT INTO speed VALUES {},{},{}'.format(currDateTime, up_speed, down_speed)
+    sql = "INSERT INTO speed VALUES ('{}',{},{});".format(currDateTime, up_speed, down_speed)
     # dict = {'Day': [currDate], 'TimeStamp': [currTime], 'UploadSpeed': [str(up_speed) + " b/s"], 'DownloadSpeed': [str(down_speed) + " b/s"]}
     # writableResponse = pd.DataFrame.from_dict(dict)
     return sql
