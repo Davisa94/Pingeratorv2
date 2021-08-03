@@ -11,8 +11,12 @@ class SpeedyTester:
 
     def run(self, db_interactor):
         st = speedtest.Speedtest()
-        print("Download: {}b/s".format(st.download()))
+        dl = st.download()
+        dl = dl/1000000
+        ul = st.upload()
+        ul = ul/1000000
+        print("Download: {} mb/s".format(dl))
         sys.stdout.flush()
-        print("Upload: {}b/s".format(st.upload()))
+        print("Upload: {} mb/s".format(ul))
         sys.stdout.flush()
         db_interactor.insertSpeed(st)

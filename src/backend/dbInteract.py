@@ -62,5 +62,4 @@ class DBInteract:
             ping = -1
         ip_id = self.getIPID(host)
         sql = "INSERT INTO ping VALUES ('{}', {}, {})".format(curr_date_time, ping, ip_id[0])
-        print(sql)
         self.DBO.execute(sql)

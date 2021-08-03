@@ -6,20 +6,6 @@ const dbApi = require('./dbAPI');
 var connection = dbApi.dbConnect()
 dbApi.getRecentPings(connection)
 
-// const {PythonShell} = require('python-shell');
-
-// let pyshell = new PythonShell('../backend/main.py');
-
-// pyshell.on('message', function(message) {
-//   console.log(message);
-// })
-
-// pyshell.end(function (err) {
-//   if (err){
-//     throw err;
-//   };
-//   console.log('finished');
-// });
 function createWindow () {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
@@ -42,6 +28,22 @@ function createWindow () {
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
   createWindow()
+
+  const {PythonShell} = require('python-shell');
+
+  let pyshell = new PythonShell('../backend/main.py');
+  
+  pyshell.on('message', function(message) {
+    console.log(message);
+  })
+  
+  pyshell.end(function (err) {
+    if (err){
+      throw err;
+    };
+    console.log('finished');
+  });
+  
 
   app.on('activate', function () {
     // On macOS it's common to re-create a window in the app when the
