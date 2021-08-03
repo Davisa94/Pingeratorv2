@@ -194,33 +194,12 @@ class PingOpenDNS:
         self.file = desktop + _OPENDNSOUTFILE
         generateFile(self.file, _PINGDICT)
 
-    def run(self, db_interactor):
-        responses = pinger(self.host)
-        res = {}
-        for response in responses:
-            res = response
-        # print("Success" if res.success else " Failed")
-        print(res)
-        wr = generateOutObject(res, self.host)
-        printDataframeToFile(wr, self.file)
-        db_interactor.insertPing(res, self.host)
-
-
 class PingCloudFlare:
     def __init__(self, desktop):
         self.host = _CLOUDFLAREHOST
         self.file = desktop + _CLOUDFLAREOUTFILE
         generateFile(self.file, _PINGDICT)
     
-    def run(self, db_interactor):
-        responses = pinger(self.host)
-        res = {}
-        for response in responses:
-            res = response
-        # print("Success" if res.success else " Failed")
-        print(res)
-        wr = generateOutObject(res, self.host)
-        printDataframeToFile(wr, self.file)
 
 class DataAnalyzer:
     def __init__(self):
