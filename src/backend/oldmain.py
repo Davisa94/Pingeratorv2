@@ -53,7 +53,7 @@ def generateOutObject(response, host):
     writableResponse = pd.DataFrame.from_dict(dict)
     return writableResponse
 
-def storeSpeedToDB(st_obj):
+def generateSpeedSQL(st_obj):
     # get current time
     up_speed = st_obj.upload()
     print("RAW UPSPEED" ,up_speed)
@@ -61,11 +61,14 @@ def storeSpeedToDB(st_obj):
     # ping = st_obj.ping()
     currDateTime = datetime.now()
     # SQLTimestamp = currDateTime.strftime('%Y-%m-%d %H:%M:%S')
-    print("TIMESTAMPRAW", SQLTimestamp)
-    sql = 'INSERT INTO speed VALUES {},{},{}'.format(currDate, up_speed, down_speed)
-    dict = {'Day': [currDate], 'TimeStamp': [currTime], 'UploadSpeed': [str(up_speed) + " b/s"], 'DownloadSpeed': [str(down_speed) + " b/s"]}
-    writableResponse = pd.DataFrame.from_dict(dict)
+    # print("TIMESTAMPRAW", SQLTimestamp)
+    sql = 'INSERT INTO speed VALUES {},{},{}'.format(currDateTime, up_speed, down_speed)
+    # dict = {'Day': [currDate], 'TimeStamp': [currTime], 'UploadSpeed': [str(up_speed) + " b/s"], 'DownloadSpeed': [str(down_speed) + " b/s"]}
+    # writableResponse = pd.DataFrame.from_dict(dict)
     return sql
+
+def storeSpeedToDB(sql, db_interactor):
+    db_interactor.insertSpeed(sql)
 
 # generates an object for storing the results of the pings and
 # for use in writing to the csv file when given an response object
@@ -77,8 +80,8 @@ def generateOutSpeedObject(st_obj):
     # ping = st_obj.ping()
     # currDate = datetime.now().date()
     currDate = datetime.now()
-    SQLTimestamp = currDate.strftime('%Y-%m-%d %H:%M:%S')
-    print("TIMESTAMPRAW", SQLTimestamp)
+    # SQLTimestamp = currDate.strftime('%Y-%m-%d %H:%M:%S')
+    # print("TIMESTAMPRAW", SQLTimestamp)
     sql = 'INSERT INTO speed VALUES {},{},{}'.format(currDate, up_speed, down_speed)
     print("Converted SQL: ", sql)
     currTime = datetime.now().time()
@@ -143,13 +146,15 @@ class SpeedyTester:
 
     def upload_test(self):
         pass
-    def run(self):
+    def run(self, db_interactor):
         print("The full path to my log files is at: {} ".format(self.file))
         st = speedtest.Speedtest()
         # print("Success" if res.success else " Failed")
         print(st.download())
-        sql = storeSpeedToDB(st)
-        printDataframeToFile(wr, self.file)
+        sql = generateSpeedSQL(st)
+        storeSpeedToDB(sql, db_interactor)
+
+        # printDataframeToFile(wr, self.file)
 
 
 class PingGoogle:
@@ -235,7 +240,7 @@ def main():
             pingG.run()
             pingC.run()
             pingO.run()
-            st.run()
+            st.run(db_interactor)
 
         input("Press Enter To Continue")
         exit()
