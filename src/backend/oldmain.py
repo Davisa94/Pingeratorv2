@@ -244,6 +244,8 @@ def main():
             # pingC.run()
             # pingO.run()
             st.run(db_interactor)
+            # commit the changes to the database
+            db_connection.commit()
 
         input("Press Enter To Continue")
         exit()
