@@ -6,6 +6,7 @@ from datetime import datetime
 import speedtest
 from dbConnect import MyDb
 from dbInteract import DBInteract
+import re
 
 
 # Global Values
@@ -47,9 +48,10 @@ def generateOutObject(response, host):
         "Day": [currDate],
         'TimeStamp': [currTime],
         'Host': [host],
-        "responseTIme": [response],
+        "responseTime": [response],
         "Succeeded": [succeeded]
     }
+    responseToRawPing(str(response))
     writableResponse = pd.DataFrame.from_dict(dict)
     return writableResponse
 
@@ -137,6 +139,11 @@ def printDataframeToFile(writableResponses, file):
 def pinger(host):
     responses = ping(host, count=1)
     return responses
+
+def responseToRawPing(response):
+    raw_ping = re.findall('(\d+\.\d+)?ms',response)
+    print("RAW PING: ", raw_ping)
+    return raw_ping
 
 class SpeedyTester:
     def __init__(self, desktop):
@@ -241,7 +248,7 @@ def main():
 
         while True:
             # time.sleep(8)
-            # pingG.run()
+            pingG.run()
             # pingC.run()
             # pingO.run()
             st.run(db_interactor)

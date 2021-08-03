@@ -5,6 +5,7 @@
 
 import pymysql
 from datetime import datetime
+import re
 
 
 class DBInteract:
@@ -43,12 +44,18 @@ class DBInteract:
         sql = "INSERT INTO speed VALUES ('{}',{},{});".format(curr_date_time, up_speed, down_speed)
         self.DBO.execute(sql)
 
+    def responseToRawPing(response):
+        raw_ping = re.findall('\d+(\.\d+)?ms',response)
+        print("RAW PING: ", raw_ping)
+        return raw_ping
+
     def insertPing(self, ping_response, host):
         # get current time
         succeeded = response.success
         curr_date_time = datetime.now()
         print("CURRENTDATETIME: ", datetime.now())
         currTime = datetime.now().time()
+        self.responseToRawPing(response)
         dict = {
             "Day": [currDate],
             'TimeStamp': [currTime],
@@ -56,6 +63,7 @@ class DBInteract:
             "responseTIme": [response],
             "Succeeded": [succeeded]
         }
-        sql = "INSERT INTO pings VALUES ('{}', )"
+
+        sql = "INSERT INTO ping VALUES ('{}', )"
         writableResponse = pd.DataFrame.from_dict(dict)
         return writableResponse
