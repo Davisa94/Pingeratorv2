@@ -1,5 +1,4 @@
 // Modules to control application life and create native browser window
-const { spawn } = require('child_process')
 const {app, BrowserWindow} = require('electron')
 const path = require('path')
 const dbApi = require('./dbAPI');

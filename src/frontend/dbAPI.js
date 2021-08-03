@@ -1,17 +1,13 @@
+var mysql = require('mysql');
+var connection =
 
-
-function printCreds(){
+function getDBCredentials(){
     console.log("prepping file")
     var path = require('path');
-    var credentials;
     credsFile = path.join(__dirname, '../backend/creds.json');
     console.log(credsFile);
     var fs = require('fs');
-    var creds = await fs.readFile(credsFile, 'utf8', function (err, data) {
-        if (err) return console.log(err);
-        credentials = data;
-        return data
-      });
+    var creds = fs.readFileSync(credsFile, 'utf8');
     console.log(creds);
 }
 
@@ -39,4 +35,4 @@ function dbApi()
     console.log('finished');
     });
 };
-module.exports = { dbApi, printCreds }
+module.exports = { dbApi, getDBCredentials }
