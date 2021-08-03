@@ -36,12 +36,11 @@ def main():
     db_cursor = db_connection.cursor()
     db_interactor = DBInteract(db_cursor)
     try:
-        print("The detected desktop directory is {} and will be used for storing the data folder".format(home_dir))
-        pingG = PingGoogle(home_dir)
-        pingC = PingCloudFlare(home_dir) 
-        pingO = PingOpenDNS(home_dir)
+        pingG = PingGoogle()
+        pingC = PingCloudFlare() 
+        pingO = PingOpenDNS()
         analyzer = DataAnalyzer()
-        st = SpeedyTester(home_dir)
+        st = SpeedyTester()
 
         while True:
             time.sleep(8)
