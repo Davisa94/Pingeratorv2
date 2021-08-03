@@ -141,7 +141,7 @@ def pinger(host):
     return responses
 
 def responseToRawPing(response):
-    raw_ping = re.findall('(\d+\.\d+)?ms',response)
+    raw_ping = re.search('(([0-9]+\.[0-9]+)?ms)',str(response))
     print("RAW PING: ", raw_ping)
     return raw_ping
 
@@ -172,7 +172,7 @@ class PingGoogle:
         generateFile(self.file, _PINGDICT)
 
 
-    def run(self):
+    def run(self, db_interactor):
         print("The full path to my log files is at: {} ".format(self.file))
         responses = pinger(self.host)
         res = {}
@@ -190,7 +190,7 @@ class PingOpenDNS:
         self.file = desktop + _OPENDNSOUTFILE
         generateFile(self.file, _PINGDICT)
 
-    def run(self):
+    def run(self, db_interactor):
         responses = pinger(self.host)
         res = {}
         for response in responses:
@@ -199,6 +199,7 @@ class PingOpenDNS:
         print(res)
         wr = generateOutObject(res, self.host)
         printDataframeToFile(wr, self.file)
+        db_interactor.insertPing(res, self.host)
 
 
 class PingCloudFlare:
@@ -207,7 +208,7 @@ class PingCloudFlare:
         self.file = desktop + _CLOUDFLAREOUTFILE
         generateFile(self.file, _PINGDICT)
     
-    def run(self):
+    def run(self, db_interactor):
         responses = pinger(self.host)
         res = {}
         for response in responses:
@@ -248,9 +249,9 @@ def main():
 
         while True:
             # time.sleep(8)
-            pingG.run()
+            pingG.run(db_interactor)
             # pingC.run()
-            # pingO.run()
+            pingO.run(db_interactor)
             st.run(db_interactor)
             # commit the changes to the database
             db_connection.commit()

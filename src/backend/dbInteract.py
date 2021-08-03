@@ -31,7 +31,6 @@ class DBInteract:
     def getIPID(self, ip):
         sql = ("SELECT id FROM iplookup WHERE ipv4 = '{}'".format(ip))
         self.DBO.execute(sql)
-        response_id = db_interactor.getIPID(_CLOUDFLAREHOST)
         ip_id = self.DBO.fetchall()
         return ip_id[0]
 
@@ -44,16 +43,19 @@ class DBInteract:
         sql = "INSERT INTO speed VALUES ('{}',{},{});".format(curr_date_time, up_speed, down_speed)
         self.DBO.execute(sql)
 
-    def responseToRawPing(response):
-        raw_ping = re.findall('\d+(\.\d+)?ms',response)
-        print("RAW PING: ", raw_ping)
+    def responseToRawPing(self, response):
+        raw_ping = re.search('(([0-9]+\.[0-9]+)?ms)',str(response))
+        print("RAW PING: ", raw_ping[0])
+        raw_ping = raw_ping[0]
+        raw_ping = raw_ping.strip("ms")
+        print(raw_ping)
         return raw_ping
 
     def insertPing(self, ping_response, host):
         # get current time
         curr_date_time = datetime.now()
-        if response != "Request timed out":
-            ping = self.responseToRawPing(response)
+        if ping_response != "Request timed out":
+            ping = self.responseToRawPing(ping_response)
         else:
             ping = -1
         ip_id = self.getIPID(host)
