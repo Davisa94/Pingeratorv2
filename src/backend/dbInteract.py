@@ -45,12 +45,8 @@ class DBInteract:
 
     def responseToRawPing(self, response):
         raw_ping = re.search('(([0-9]+\.[0-9]+)?ms)',str(response))
-        print("RAW PING: ", raw_ping[0])
-        sys.stdout.flush()
         raw_ping = raw_ping[0]
         raw_ping = raw_ping.strip("ms")
-        print(raw_ping)
-        sys.stdout.flush()
         return raw_ping
 
     def getLatestPing(self):

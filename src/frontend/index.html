@@ -1,33 +1,14 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8">
-    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
-    <title>Hello World!</title>
-  </head>
-  <body>
-    
-    <div style="height: 54px; text-align: center">
-      <h1>Pingerator</h1>
-      </div>
-      <hr />
-      <h3>Enter the start date and time and the end date and time of the ping and speed statistics you want to view</h3>
-      <p>
-          &nbsp;</p>
-      <p>
-          <label>Enter Start Date-Time:</label>
-          <input id="start" type="datetime-local" /></p>
-      &nbsp;<p>
-          <label>Enter End Date-Time:</label>
-          <input id="end" type="datetime-local" /></p>
+﻿<!DOCTYPE html>
 
-      <p>
-          <input id="SubmitHistorical" type="submit" value="Get Data" /></p>
-      <p>
-      <a id="live" href="liveView.html">Live View</a></p>
-
-    <!-- You can also require other files to run in this process -->
-    <script src="./renderer.js"></script>
-  </body>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Live View</title>
+    <script src="pythonAPI.js"></script>
+</head>
+<body onload="callMain()">
+    <h1 style="text-align:center">Live Data</h1>
+    <div id="live-data"></div>
+    <a id="home" href="index.html">Home View</a>
+</body>
 </html>

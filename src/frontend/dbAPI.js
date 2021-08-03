@@ -37,12 +37,10 @@ function dbConnect(){
 function getRecentPings(connection){
     let sql = `SELECT * FROM ping ORDER BY datetime_tested DESC LIMIT 3`;
     query = connection.query(sql, function(err, rows, fields) {
-        console.log(rows[0].RowDataPacket)
-        // row1_obj = JSON.parse(rows[0][1])
-        rows.forEach(function(row){
-            // let row_obj = JSON.parse(row)
-            console.log(row["RowDataPacket"]);
-        });
+        console.log(fields)
+       for(row in rows){
+           console.log(row);
+       }
         // console.log(colNames)
 
       });

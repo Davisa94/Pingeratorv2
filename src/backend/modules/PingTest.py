@@ -12,7 +12,7 @@ class Pinger:
 class Ping(Pinger):
     def __init__(self):
         self.host=""
-    
+
     def run(self, db_interactor):
         responses = self.pinger(self.host)
         res = {}
