@@ -25,13 +25,8 @@ class DBInteract:
     def insertSpeed(self, st_obj):
         # get current time
         up_speed = st_obj.upload()
-        print("RAW UPSPEED" ,up_speed)
         down_speed = st_obj.download()
         # ping = st_obj.ping()
         currDateTime = datetime.now()
-        # SQLTimestamp = currDateTime.strftime('%Y-%m-%d %H:%M:%S')
-        # print("TIMESTAMPRAW", SQLTimestamp)
         sql = "INSERT INTO speed VALUES ('{}',{},{});".format(currDateTime, up_speed, down_speed)
-        # dict = {'Day': [currDate], 'TimeStamp': [currTime], 'UploadSpeed': [str(up_speed) + " b/s"], 'DownloadSpeed': [str(down_speed) + " b/s"]}
-        # writableResponse = pd.DataFrame.from_dict(dict)
         self.DBO.execute(sql)

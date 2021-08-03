@@ -151,8 +151,9 @@ class SpeedyTester:
         st = speedtest.Speedtest()
         # print("Success" if res.success else " Failed")
         print(st.download())
-        sql = generateSpeedSQL(st)
-        storeSpeedToDB(sql, db_interactor)
+        # sql = generateSpeedSQL(st)
+        # storeSpeedToDB(sql, db_interactor)
+        db_interactor.insertSpeed(st)
 
         # printDataframeToFile(wr, self.file)
 
@@ -198,7 +199,7 @@ class PingCloudFlare:
         self.host = _CLOUDFLAREHOST
         self.file = desktop + _CLOUDFLAREOUTFILE
         generateFile(self.file, _PINGDICT)
-
+    
     def run(self):
         responses = pinger(self.host)
         res = {}
