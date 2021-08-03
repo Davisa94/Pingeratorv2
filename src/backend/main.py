@@ -3,7 +3,7 @@ import os
 import pandas as pd
 from pythonping import ping
 from datetime import datetime
-import speedtest
+
 from dbConnect import MyDb
 from dbInteract import DBInteract
 import re
@@ -16,8 +16,7 @@ from modules import PythonPing as PP
 runningDir = os.path.dirname(__file__)
 
 
-    
-
+# TODO: Impliment data analysis 
 class DataAnalyzer:
     def __init__(self):
         pass
