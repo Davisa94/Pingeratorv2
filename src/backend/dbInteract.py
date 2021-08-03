@@ -22,12 +22,17 @@ class DBInteract:
         sql = ("SELECT * FROM speeds WHERE (course_code = %s and course_prefix = %s)")
         self.DBO.cursor.execute(sql, (course_code, course_prefix))
         return dbObject
+
     def stripGarbage(self, response):
         stripped = response.strip("(),")
+
+    #Given an Ip address returns the id of that adress from the iplookup table 
     def getIPID(self, ip):
         sql = ("SELECT id FROM iplookup WHERE ipv4 = '{}'".format(ip))
         self.DBO.execute(sql)
-        return self.DBO
+        response_id = db_interactor.getIPID(_CLOUDFLAREHOST)
+        ip_id = self.DBO.fetchall()
+        return ip_id[0]
 
     def insertSpeed(self, st_obj):
         # get current time

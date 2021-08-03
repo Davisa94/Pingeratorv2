@@ -36,8 +36,8 @@ CREATE table speed (
     upspeed_value DOUBLE NULL);
 
 CREATE table pings (
+    datetime_tested TIMESTAMP NOT NULL,
     ping_value FLOAT NULL,
-    upspeed_value DOUBLE NULL,
     ipv4_id BIGINT UNSIGNED NOT NULL,
     CONSTRAINT ipv4_id
         FOREIGN KEY(ipv4_id)
