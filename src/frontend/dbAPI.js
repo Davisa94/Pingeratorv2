@@ -1,5 +1,4 @@
-var mysql = require('mysql');
-var connection =
+
 
 function getDBCredentials(){
     console.log("prepping file")
@@ -12,9 +11,29 @@ function getDBCredentials(){
 }
 
 function dbConnect(){
-    return 0;
+    var mysql = require('mysql');
+    var creds = getDBCredentials();
+    var hostname = "localhost";
+    var username = creds.user;
+    var pass = creds.password;
+    var connection = mysql.createConnection({
+        host: hostname,
+        user: username,
+        password: pass,
+    });
+    connection.connect(function(err){
+        if(err){
+            console.log(`Issue connecting to the Database: ${err}`)
+        }
+    })
+    return connection;
 }
 
+function getRecentPings(connection){
+    let sql = `SELECT * FROM ping ORDER BY datetime_tested DESC LIMIT 3`;
+    query = connection.query(sql);
+    console.log(query);
+}
 
 function dbApi()
 {
@@ -35,4 +54,4 @@ function dbApi()
     console.log('finished');
     });
 };
-module.exports = { dbApi, getDBCredentials }
+module.exports = { dbApi, getDBCredentials, dbConnect, getRecentPings }
