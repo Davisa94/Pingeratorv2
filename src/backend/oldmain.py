@@ -222,7 +222,8 @@ def main():
     # create DB object
     db_obj = MyDb()
     # connect and get cursor
-    db_cursor = db_obj.connect()
+    db_connection = db_obj.connect()
+    db_cursor = db_connection.cursor()
     db_interactor = DBInteract(db_cursor)
     try:
         
@@ -250,7 +251,7 @@ def main():
     except Exception as e:
         print("An unexpected exeception has occured:{}".format(e))
     finally:
-        db_connection.close()
+        db_cursor.close()
 
     
 
