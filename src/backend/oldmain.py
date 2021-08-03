@@ -12,6 +12,8 @@ import re
 # Global Values
 
 _DIRECTORYMAIN = '\\InternetTester\\responses'
+# The interval between rounds of testing
+_TESTINTERVAL = 8
 _GOOGLEOUTFILE = '\\googleResponses.csv'
 _CLOUDFLAREOUTFILE = "\\cloudFlareResponses.csv"
 _OPENDNSOUTFILE = "\\openDns.csv"
@@ -233,11 +235,11 @@ def main():
         st = SpeedyTester(home_dir)
 
         while True:
-            # time.sleep(8)
+            time.sleep(8)
             pingG.run(db_interactor)
-            # pingC.run()
-            # pingO.run(db_interactor)
-            # st.run(db_interactor)
+            pingC.run()
+            pingO.run(db_interactor)
+            st.run(db_interactor)
             # commit the changes to the database
             db_connection.commit()
 
