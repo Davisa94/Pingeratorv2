@@ -1,4 +1,4 @@
-from modules import GlobalValues
+from modules import GlobalValues as GV
 from pythonping import ping
 class Pinger:
     def pinger(host):
@@ -20,12 +20,12 @@ class Ping(Pinger):
 
 class PingGoogle(Ping):
     def __init__(self):
-        self.host = _GOOGLEHOST
+        self.host = GV._GOOGLEHOST
 
 class PingOpenDNS(Ping):
     def __init__(self):
-        self.host = _OPENDNSHOST
+        self.host = GV._OPENDNSHOST
 
 class PingCloudFlare(Ping):
     def __init__(self):
-        self.host = _CLOUDFLAREHOST
+        self.host = GV._CLOUDFLAREHOST

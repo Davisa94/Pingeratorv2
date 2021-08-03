@@ -10,7 +10,7 @@ import re
 
 from modules import GlobalValues
 from modules import FileManager as FM
-from modules import PingTest as PP
+from modules import PingTest as PT
 
 # Global Values
 runningDir = os.path.dirname(__file__)
@@ -36,9 +36,9 @@ def main():
     db_cursor = db_connection.cursor()
     db_interactor = DBInteract(db_cursor)
     try:
-        pingG = PingGoogle()
-        pingC = PingCloudFlare() 
-        pingO = PingOpenDNS()
+        pingG = PT.PingGoogle()
+        pingC = PT.PingCloudFlare() 
+        pingO = PT.PingOpenDNS()
         analyzer = DataAnalyzer()
         st = SpeedyTester()
 
