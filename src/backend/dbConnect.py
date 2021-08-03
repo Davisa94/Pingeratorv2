@@ -46,7 +46,7 @@ class MyDb:
         tableData = cursor.fetchall()
         return tableData
 
-    def dbConnect(self) ->"dont forget to close the connection":
+    def connect(self) ->"dont forget to close the connection":
         mysql_connection = pymysql.connect(self.host, self.user, self.password, self.schema)
         mysql_connection.cursor()
         return mysql_connection
