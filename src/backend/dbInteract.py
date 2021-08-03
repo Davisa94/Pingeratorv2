@@ -54,10 +54,12 @@ class DBInteract:
     def getLatestPing(self):
         sql = ("SELECT * FROM ping ORDER BY datetime_tested DESC LIMIT 3")
         # TODO: Finish me
+
     def insertPing(self, ping_response, host):
         # get current time
         curr_date_time = datetime.now()
-        if ping_response != "Request timed out":
+        if "Request timed out" not in str(ping_response):
+            print("BEFORE ERROR: ", ping_response)
             ping = self.responseToRawPing(ping_response)
         else:
             ping = -1

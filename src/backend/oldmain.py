@@ -159,24 +159,33 @@ class SpeedyTester:
 
         # printDataframeToFile(wr, self.file)
 
+class Ping:
+    def __init__(self):
+        self.host=""
+        self.file=""
+    
+    def runLocal(self, db_interactor):
+        responses = pinger(self.host)
+        res = {}
+        for response in responses:
+            res = response
+        wr = generateOutObject(res, self.host)
+        printDataframeToFile(wr, self.file)
+    
+    def run(self, db_interactor):
+        responses = pinger(self.host)
+        res = {}
+        for response in responses:
+            res = response
+        print(res)
+        db_interactor.insertPing(res, self.host)
 
-class PingGoogle:
+class PingGoogle(Ping):
     def __init__(self, desktop):
         self.host = _GOOGLEHOST
         self.file = desktop + _GOOGLEOUTFILE
         generateFile(self.file, _PINGDICT)
 
-
-    def run(self, db_interactor):
-        print("The full path to my log files is at: {} ".format(self.file))
-        responses = pinger(self.host)
-        res = {}
-        for response in responses:
-            res = response
-        # print("Success" if res.success else " Failed")
-        print(res)
-        wr = generateOutObject(res, self.host)
-        printDataframeToFile(wr, self.file)
 
 
 class PingOpenDNS:
@@ -221,6 +230,16 @@ class DataAnalyzer:
         place_holder_message = "Analyzing the data. Press any key to exit the application."
         print(place_holder_message)
 
+def PrintException():
+    exc_type, exc_obj, tb = sys.exc_info()
+    f = tb.tb_frame
+    lineno = tb.tb_lineno
+    filename = f.f_code.co_filename
+    linecache.checkcache(filename)
+    line = linecache.getline(filename, lineno, f.f_globals)
+    print('EXCEPTION IN ({}, LINE {} "{}"): {}'.format(filename, lineno, line.strip(), exc_obj))
+
+
 def main():
     # Connect to the Database
     # create DB object
@@ -246,16 +265,16 @@ def main():
             # time.sleep(8)
             pingG.run(db_interactor)
             # pingC.run()
-            pingO.run(db_interactor)
-            st.run(db_interactor)
+            # pingO.run(db_interactor)
+            # st.run(db_interactor)
             # commit the changes to the database
             db_connection.commit()
 
         input("Press Enter To Continue")
         exit()
     # Close the connection
-    except Exception as e:
-        print("An unexpected exeception has occured:{}".format(e))
+    except:
+        PrintException()
     finally:
         db_cursor.close()
 
