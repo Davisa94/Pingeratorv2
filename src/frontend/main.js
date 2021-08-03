@@ -2,7 +2,9 @@
 const {app, BrowserWindow} = require('electron')
 const path = require('path')
 const dbApi = require('./dbAPI');
-dbApi.printCreds()
+// dbApi.printCreds()
+var connection = dbApi.dbConnect()
+dbApi.getRecentPings(connection)
 
 // const {PythonShell} = require('python-shell');
 

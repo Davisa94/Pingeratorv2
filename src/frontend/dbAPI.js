@@ -8,6 +8,7 @@ function getDBCredentials(){
     var fs = require('fs');
     var creds = fs.readFileSync(credsFile, 'utf8');
     console.log(creds);
+    return creds;
 }
 
 function dbConnect(){
