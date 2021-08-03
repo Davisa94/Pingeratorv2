@@ -214,8 +214,8 @@ class DataAnalyzer:
 
 def main():
     # Connect to the Database
-    myDB = dbConnect()
-    db_connection = myDB.connect()
+    db_obj = MyDb()
+    db_connection = db_obj.connect()
     db_interactor = DBInteract(db_connection)
     try:
         
