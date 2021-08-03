@@ -1,3 +1,5 @@
+from modules import GlobalValues
+from pythonping import ping
 class Pinger:
     def pinger(host):
         responses = ping(host, count=1)
@@ -27,7 +29,7 @@ class Ping(Pinger):
         db_interactor.insertPing(res, self.host)
 
 class PingGoogle(Ping):
-    def __init__(self, desktop):
+    def __init__(self):
         self.host = _GOOGLEHOST
         self.file = desktop + _GOOGLEOUTFILE
         generateFile(self.file, _PINGDICT)
@@ -35,13 +37,13 @@ class PingGoogle(Ping):
 
 
 class PingOpenDNS(Ping):
-    def __init__(self, desktop):
+    def __init__(self):
         self.host = _OPENDNSHOST
         self.file = desktop + _OPENDNSOUTFILE
         generateFile(self.file, _PINGDICT)
 
 class PingCloudFlare(Ping):
-    def __init__(self, desktop):
+    def __init__(self):
         self.host = _CLOUDFLAREHOST
         self.file = desktop + _CLOUDFLAREOUTFILE
         generateFile(self.file, _PINGDICT)
