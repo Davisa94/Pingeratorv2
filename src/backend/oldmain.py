@@ -227,7 +227,9 @@ def main():
     db_cursor = db_connection.cursor()
     db_interactor = DBInteract(db_cursor)
     try:
-        
+        response_id = db_interactor.getIPID(_CLOUDFLAREHOST)
+        cloud_id = response_id.fetchone()
+        print("ID OF CLOUDFLARE IS: ", cloud_id[0])
         desktop_dir = generateDesktopPath()
         home_dir = generateHomeFolder(desktop_dir)
         #check if files exist, if they do move along, if not, generate them with appropriate headers
