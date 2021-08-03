@@ -140,11 +140,6 @@ def pinger(host):
     responses = ping(host, count=1)
     return responses
 
-def responseToRawPing(response):
-    raw_ping = re.search('(([0-9]+\.[0-9]+)?ms)',str(response))
-    print("RAW PING: ", raw_ping)
-    return raw_ping
-
 class SpeedyTester:
     def __init__(self, desktop):
         self.file = desktop + _SPEEDSOUTFILE
