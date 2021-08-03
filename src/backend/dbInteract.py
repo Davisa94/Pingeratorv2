@@ -9,6 +9,7 @@ import pymysql
 class DBInteract:
     def __init__(self, dbObject=""):
         self.DBO = dbObject
+        print("RAW DATABASE OBJECT: ", self.DBO)
 
 
     def getAllSpeeds(self):
@@ -22,4 +23,4 @@ class DBInteract:
         return dbObject
 
     def insertSpeed(self, sql):
-        self.DBO.cursor.execute(sql)
+        self.DBO.execute(sql)

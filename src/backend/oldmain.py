@@ -219,9 +219,11 @@ class DataAnalyzer:
 
 def main():
     # Connect to the Database
+    # create DB object
     db_obj = MyDb()
-    db_connection = db_obj.connect()
-    db_interactor = DBInteract(db_connection)
+    # connect and get cursor
+    db_cursor = db_obj.connect()
+    db_interactor = DBInteract(db_cursor)
     try:
         
         desktop_dir = generateDesktopPath()
@@ -236,10 +238,10 @@ def main():
         st = SpeedyTester(home_dir)
 
         while True:
-            time.sleep(8)
-            pingG.run()
-            pingC.run()
-            pingO.run()
+            # time.sleep(8)
+            # pingG.run()
+            # pingC.run()
+            # pingO.run()
             st.run(db_interactor)
 
         input("Press Enter To Continue")

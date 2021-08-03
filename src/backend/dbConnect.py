@@ -48,8 +48,8 @@ class MyDb:
 
     def connect(self) ->"dont forget to close the connection":
         mysql_connection = pymysql.connect(host=self.host, user=self.user, password=self.password, database=self.schema)
-        mysql_connection.cursor()
-        return mysql_connection
+        cursorObj = mysql_connection.cursor()
+        return cursorObj
     
 
 # mydb = MyDb()
