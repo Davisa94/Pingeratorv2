@@ -188,13 +188,13 @@ class PingGoogle(Ping):
 
 
 
-class PingOpenDNS:
+class PingOpenDNS(Ping):
     def __init__(self, desktop):
         self.host = _OPENDNSHOST
         self.file = desktop + _OPENDNSOUTFILE
         generateFile(self.file, _PINGDICT)
 
-class PingCloudFlare:
+class PingCloudFlare(Ping):
     def __init__(self, desktop):
         self.host = _CLOUDFLAREHOST
         self.file = desktop + _CLOUDFLAREOUTFILE
