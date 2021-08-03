@@ -3,24 +3,28 @@
 function getDBCredentials(){
     console.log("prepping file")
     var path = require('path');
-    credsFile = path.join(__dirname, '../backend/creds.json');
-    console.log(credsFile);
+    credsFile = path.join(__dirname, '../backend/dbcredentials.json');
+    // console.log(credsFile);
     var fs = require('fs');
     var creds = fs.readFileSync(credsFile, 'utf8');
-    console.log(creds);
+    // console.log(creds);
     return creds;
 }
 
 function dbConnect(){
-    var mysql = require('mysql');
+    var mysql = require('mysql2');
     var creds = getDBCredentials();
+    var creds_obj = JSON.parse(creds);
     var hostname = "localhost";
-    var username = creds.user;
-    var pass = creds.password;
+    var username = creds_obj.user;
+    var schema = "pingerator"
+    // console.warn(`\n\n\n\n\n\n\n\n\n\n\n\nUSERNAME: ${username}`);
+    var pass = creds_obj.password;
     var connection = mysql.createConnection({
         host: hostname,
         user: username,
         password: pass,
+        database: schema
     });
     connection.connect(function(err){
         if(err){
@@ -32,8 +36,17 @@ function dbConnect(){
 
 function getRecentPings(connection){
     let sql = `SELECT * FROM ping ORDER BY datetime_tested DESC LIMIT 3`;
-    query = connection.query(sql);
-    console.log(query);
+    query = connection.query(sql, function(err, rows, fields) {
+        console.log(rows[0].RowDataPacket)
+        // row1_obj = JSON.parse(rows[0][1])
+        rows.forEach(function(row){
+            // let row_obj = JSON.parse(row)
+            console.log(row["RowDataPacket"]);
+        });
+        // console.log(colNames)
+
+      });
+    console.log(query.sql);
 }
 
 function dbApi()
