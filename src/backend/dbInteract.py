@@ -51,6 +51,9 @@ class DBInteract:
         print(raw_ping)
         return raw_ping
 
+    def getLatestPing(self):
+        sql = ("SELECT * FROM ping ORDER BY datetime_tested DESC LIMIT 3")
+        # TODO: Finish me
     def insertPing(self, ping_response, host):
         # get current time
         curr_date_time = datetime.now()
