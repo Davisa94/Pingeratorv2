@@ -28,6 +28,23 @@ class DBInteract:
         up_speed = st_obj.upload()
         down_speed = st_obj.download()
         # ping = st_obj.ping()
-        currDateTime = datetime.now()
-        sql = "INSERT INTO speed VALUES ('{}',{},{});".format(currDateTime, up_speed, down_speed)
+        curr_date_time = datetime.now()
+        sql = "INSERT INTO speed VALUES ('{}',{},{});".format(curr_date_time, up_speed, down_speed)
         self.DBO.execute(sql)
+
+    def insertPing(self, ping_response, host):
+        # get current time
+        succeeded = response.success
+        curr_date_time = datetime.now()
+        print("CURRENTDATETIME: ", datetime.now())
+        currTime = datetime.now().time()
+        dict = {
+            "Day": [currDate],
+            'TimeStamp': [currTime],
+            'Host': [host],
+            "responseTIme": [response],
+            "Succeeded": [succeeded]
+        }
+        sql = "INSERT INTO pings VALUES ('{}', )"
+        writableResponse = pd.DataFrame.from_dict(dict)
+        return writableResponse
