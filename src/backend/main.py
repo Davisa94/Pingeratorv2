@@ -10,7 +10,7 @@ import re
 
 from modules import GlobalValues
 from modules import FileManager as FM
-from modules import PythonPing as PP
+from modules import PingTest as PP
 
 # Global Values
 runningDir = os.path.dirname(__file__)
@@ -36,11 +36,6 @@ def main():
     db_cursor = db_connection.cursor()
     db_interactor = DBInteract(db_cursor)
     try:
-
-        desktop_dir = generateDesktopPath()
-        home_dir = generateHomeFolder(desktop_dir)
-        #check if files exist, if they do move along, if not, generate them with appropriate headers
-
         print("The detected desktop directory is {} and will be used for storing the data folder".format(home_dir))
         pingG = PingGoogle(home_dir)
         pingC = PingCloudFlare(home_dir) 
@@ -61,7 +56,7 @@ def main():
         exit()
     # Close the connection
     except Exception as e:
-        print("An unexpected error occurred: {}".format(e))
+        print("An unexpected error occurred: }".formt(e))
     finally:
         db_cursor.close()
 
