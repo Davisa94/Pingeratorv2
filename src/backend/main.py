@@ -8,36 +8,11 @@ from dbConnect import MyDb
 from dbInteract import DBInteract
 import re
 
-from modules import GlobalValues as GV
+from modules import GlobalValues
 from modules import FileManager as FM
 from modules import PythonPing as PP
 
 # Global Values
-
-_DIRECTORYMAIN = '\\InternetTester\\responses'
-# The interval between rounds of testing
-_TESTINTERVAL = 8
-_GOOGLEOUTFILE = '\\googleResponses.csv'
-_CLOUDFLAREOUTFILE = "\\cloudFlareResponses.csv"
-_OPENDNSOUTFILE = "\\openDns.csv"
-_SPEEDSOUTFILE = "\\speeds.csv"
-_CLOUDFLAREHOST = "1.1.1.1"
-_GOOGLEHOST = "8.8.8.8"
-_OPENDNSHOST = "208.67.222.222"
-_PINGDICT = {
-    'Day': ['Day'],
-    'TimeStamp': ['TimeStamp'],
-    'Host': ['Host'],
-    'responseTIme': ['ResponseTime'],
-    'Succeeded': ['Succeeded']
-}
-_SPEEDDICT = {
-    'Day': ['Day'],
-    'TimeStamp': ['TimeStamp'],
-    'UploadSpeed': ['UploadSpeed'],
-    'DownloadSpeed': ['DownloadSpeed'],
-    'FullResponse': ['FullResponse']
-}
 runningDir = os.path.dirname(__file__)
 
 
