@@ -7,3 +7,6 @@ src/backend/__pycache__/dbConnect.cpython-38.pyc
 src/backend/__pycache__/dbInteract.cpython-38.pyc
 Solution1.sln
 .vs/Solution1/v16/.suo
+Figma Tokens.txt
+build/*
+src/frontend/build/*
