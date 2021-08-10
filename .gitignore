@@ -10,3 +10,5 @@ Solution1.sln
 Figma Tokens.txt
 build/*
 src/frontend/build/*
+
+src/TkinterFront/backend/*
