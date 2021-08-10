@@ -9,15 +9,22 @@ ASSETS_PATH = OUTPUT_PATH / Path("./assets")
 
 from tkinter import *
 import importlib.util
+modulepath = OUTPUT_PATH + "../backend/mainModu"
+print("OUTPUT PATH :", OUTPUT_PATH)
+spec = importlib.util.spec_from_file_location("mainModule", "../backend/mainModule.py")
+foo = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(foo)
+# foo.MyClass()
 
+# from ..backend import mainModule
+# scanner = importlib.import_module(name, package)
 
-from . import mainModule
 
 def relative_to_assets(path: str) -> Path:
     return ASSETS_PATH / Path(path)
 
 def invoke_scanner():
-    mainModule.main()
+    foo.main()
 
 
 window = Tk()
