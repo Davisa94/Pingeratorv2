@@ -1,0 +1,8 @@
+TODO: Multithreading:
+    * Thread for the main loop
+    * Thread for the GUI
+
+TODO: display output from console to blue output Area
+
+TODO: Change button to be unclickable after initial click 
+    TODO: - > Change to stop thread on click to have a star/stop toggle button
