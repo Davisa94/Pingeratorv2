@@ -12,3 +12,4 @@ build/*
 src/frontend/build/*
 
 src/TkinterFront/backend/*
+src/backend/nohup.out

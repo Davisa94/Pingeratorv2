@@ -15,6 +15,7 @@ class Ping(Pinger):
 
     def run(self, db_interactor):
         responses = self.pinger(self.host)
+        print("ptln18")
         res = {}
         for response in responses:
             res = response

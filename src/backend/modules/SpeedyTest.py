@@ -10,7 +10,12 @@ import speedtest
 class SpeedyTester:
 
     def run(self, db_interactor):
-        st = speedtest.Speedtest()
+        try:
+            st = speedtest.Speedtest()
+        except Exception as e:
+            print(e)
+            print("Can't Connect to SpeedTest Servers: ".format(e))
+            sys.stdout.flush()
         dl = st.download()
         dl = dl/1000000
         ul = st.upload()

@@ -6,7 +6,7 @@ use pingerator;
     -- test_time_id fk > testtime table
     -- domain name
     -- 
-CREATE table ipLookup(
+CREATE table iplookup(
     id SERIAL NOT NULL,
     time_created TIMESTAMP NOT NULL,
     ipv4 VARCHAR(15),
@@ -41,7 +41,7 @@ CREATE table ping (
     ipv4_id BIGINT UNSIGNED NOT NULL,
     CONSTRAINT ipv4_id
         FOREIGN KEY(ipv4_id)
-        REFERENCES ipLookup (id));
+        REFERENCES iplookup (id));
 -- we need a table for the pings
     -- test_time_id fk > testtime table
     -- we need ping response time or NULL if none

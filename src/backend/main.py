@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import time
 import os
 import pandas as pd
@@ -41,17 +42,26 @@ def main():
     db_interactor = DBInteract(db_cursor)
     try:
         pingG = PT.PingGoogle()
-        pingC = PT.PingCloudFlare() 
+        print("init Google")
+        pingC = PT.PingCloudFlare()
+        print("init cf")
         pingO = PT.PingOpenDNS()
+        print("init odns")
         analyzer = DataAnalyzer()
         st = SpeedyTest.SpeedyTester()
+        print("init speed")
 
         while True:
             time.sleep(8)
+            print("slept")
             pingG.run(db_interactor)
+            print("pinging Google")
             pingC.run(db_interactor)
+            print("pinging CF")
             pingO.run(db_interactor)
+            print("pinging odns")
             st.run(db_interactor)
+            print("testing speed")
             # commit the changes to the database
             db_connection.commit()
 
@@ -59,6 +69,7 @@ def main():
         exit()
     # Close the connection
     except Exception as e:
+        print(e)
         print("An unexpected error occurred: ".format(e))
         sys.stdout.flush()
     finally:
